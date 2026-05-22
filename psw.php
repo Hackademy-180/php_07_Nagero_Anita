@@ -1,6 +1,12 @@
 <?php
 //collegamento esterno-altro file-per la SEO
-// questo file richiede la psw dal file primario
+
+
+
+
+// con php.psw avvia la lettura:
+
+
 require('index.php');
 
 //uso del do while

@@ -1,4 +1,6 @@
 <?php
+
+// file per messaggistica essenziale per la funzionalità;
 require('index.php');
 
 $valida = false;

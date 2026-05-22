@@ -1,5 +1,5 @@
 <!-- SEO->Separetion Of Concerns- sapero le responsabilità. -->
-
+<!-- //file delle funzioni -->
 <?php
 
 // $password = readLine("Inserisci la password: " );
