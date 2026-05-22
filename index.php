@@ -1,62 +1,106 @@
-Selfwork PHP 7
-Ripetere l’esercizio del controllo password visto a lezione (da soli o rivedendo il video)
-Implementare un metodo
- che faccia reinserire
-  la password 
-  qualora anche 
-  una delle regole non fosse 
-  rispettate 
-  e che, invece, lo interrompa
-  
-  in caso di password accettata visualizzare in console quale regola non è stata rispettata.
-
-Pusha il codice su GitHub con il nome php_07_nome_cognome.
-
-per questo esecizio serve fare ripasso della laezione dove il maestro usa strlen($password) questo perchè bisogna istaiare un controllo della lunghezza password, se la password ha regole di per se, allora deve avere 8 caratteri di minima, con questa funzione, ottieni lunghezzaper verificarla  la condizioni alla verifica codificata tramite i lmezzo del IF e  per stampare, il risulto del debug, usare var_dump o echo; con una diramazione nel else, notificheremo che, la password in alternativa è tropo corta, verifico almeno un numero, itero dunque sui singoli caratteri, con un ciclo for regolo una struttura che scorra da un indice = a 0 a una lunghezza psw data;
-la funzione, is_numeric determina se il carATTERE è UN NUMERO!!!
-
-CICLO FOR: MEGLIO DI UN FOREACH( POICHE' IN QUESTO CASO DI TRATTA DI STRINGHE E QUESTE NON SONO ITERABILI, COME ARRAY O COLLEZIONI, CON UN INDICE ACCEDO ALLA POSIZIONE SPECIFICA DI STRINGA;
-SE A FINE ITERAZIONE, NON HO TROVATO NUMERO ATTIVERO' NELL'ELESE; LA MANCAZA DI CRITERIO IN ALTERNITIVA,
-strlen e is_numeric(uso di documentazione anche per il ciclo for e foreach(diverso per il php da js))
-uso un breACH NEL MIO CICLO FOR CON IF ELSE 
+<!-- SEO->Separetion Of Concerns- sapero le responsabilità. -->
 
 <?php
-$password = readLine("Inserisci la password: " );
+
+// $password = readLine("Inserisci la password: " );
+
+// LUNGHEZZA PSW 1)
+
+function checkLenght($psw){
+   if(strlen($psw) >= 8){
+
+return true;       
+}
+ return false;  
+} 
+
+//$lenght = checkLenght($password);
+
+//2) Parte NUMERI
+
+function checkNumber($psw){
+
+for($i=0; $i < strlen($psw); $i++){
+    if(is_numeric($psw[$i])){
+
+       return true; 
+       
+
+}       
+
+}
+return false;
+}
+
+ //$number = checkNumber($password);
 
 
-//lunghezza
-if(strlen($password) >= 8){
-    echo"La password e abbastanza linga \n";
+ //3) PARTE PER: Maiuscole
+ function checkUpper($psw){
 
-}else{
-    echo"La password non e abbastanza lunga \n";
+for($i=0; $i < strlen($psw); $i++){ 
+   if(ctype_upper($psw[$i])){
+  return true;     
+
+ } 
+
+ }
+ return false;
+ } 
+
+//4) X: array da caratteri speciali 
+
+function checkSpecial($psw){
+$specialChars = [ '!' , '?' , '#' , '&' , '%'];
+
+for($i=0; $i < strlen($psw); $i++){
+   if(in_array($psw[$i] , $specialChars)){
+  return true;
+
+ }
+ }
+ return false;
+
+ }
+
+// $upper = checkUpper($password);
+
+
+//FUNZIONE PER RICHIEDERE LA VERIFICA -stampa cosa non stai rispettando;
+function result($string){
+    if (!checkLenght($string)) {
+        echo "La password non è valida: deve contenere almeno 8 caratteri.\n";
+        return false;
+    }
+
+    if (!checkNumber($string)) {
+        echo "La password non è valida: deve contenere almeno un numero.\n";
+        return false;
+    }
+
+    if (!checkUpper($string)) {
+        echo "La password non è valida: deve contenere almeno una lettera maiuscola.\n";
+        return false;
+    }
+
+    if (!checkSpecial($string)) {
+        echo "La password non è valida: deve contenere almeno un carattere speciale tra !, ?, #, &, %.\n";
+        return false;
+    }
+
+    echo "La password è valida.\n";
+    return true;
 }
 
 
-//numeri
+// $lenght = false;
+// $number = false;
+// $upper = false; 
+// $special= false;
 
-for ($i=0; $i < strlen($password); $i++){
-    echo $password[$i], "\n";
-    //Aggiunta di breck
-    break;
 
-}else{
-    echo "La password non contiene numeri \n";
-}
+// result($password);
+// result($lenght , $number ,$upper);
 
-//Maiuscole
-
-for ($i=0; $i < strlen($password); $i++){
-
-if(ctype_upper($password)[$i]){
-
-    echo "La password contiene una maiuscola \n";
-
- 
-    //Aggiunta di breck
-    break;
-
-}else{
-    echo "La password contiene una maiuscola \n";
-}
-}
+//  $spacial = checkSpecial($password);
+//  var_dump($special);
